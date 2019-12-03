@@ -513,7 +513,7 @@ spherepath_in(PG_FUNCTION_ARGS)
 	nelem = get_path_count();
 	if (nelem > 1)
 	{
-		SPoint		arr[nelem];
+		SPoint		*arr = palloc(nelem * sizeof(SPoint));
 
 		for (i = 0; i < nelem; i++)
 		{

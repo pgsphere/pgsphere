@@ -824,7 +824,7 @@ spherepoly_in(PG_FUNCTION_ARGS)
 	nelem = get_path_count();
 	if (nelem > 2)
 	{
-		SPoint		arr[nelem];
+		SPoint		*arr = palloc(nelem * sizeof(SPoint));
 
 		for (i = 0; i < nelem; i++)
 		{
@@ -892,7 +892,7 @@ spherepoly_area(PG_FUNCTION_ARGS)
 {
 	SPOLY	   *poly = PG_GETARG_SPOLY(0);
 	int32		i;
-	SPoint		s[poly->npts + 2];
+	SPoint		*s = palloc((poly->npts + 2) * sizeof(SPoint));
 	SPoint		stmp[2];
 	SEuler		se;
 	float8		sum = 0.0;
